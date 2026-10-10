@@ -1,18 +1,53 @@
 {
-  "name": "@cyanmycelium/mcp-web-workspace",
+  "name": "@cyanmycelium/mcp-web",
   "version": "0.1.0",
-  "private": true,
+  "description": "Provider-neutral web search with five adapters, an MCP server and an mcp-broker slot.",
   "type": "module",
   "license": "Apache-2.0",
-  "workspaces": ["packages/*"],
-  "engines": { "node": ">=22.0.0" },
+  "author": "Guillaume Pelletier (CyanMycelium)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandaGaume/mcp-web.git"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "mcp-web": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./api": {
+      "types": "./dist/api.d.ts",
+      "import": "./dist/api.js"
+    }
+  },
+  "files": [
+    "dist",
+    "grammars",
+    "profiles",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "npm run build -w @cyanmycelium/mcp-web",
+    "build": "tsup",
+    "prepublishOnly": "npm run build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "start": "node --env-file-if-exists=.env packages/mcp-web/dist/cli.js",
-    "format": "prettier --check \"packages/*/src/**/*.ts\" \"tests/**/*.ts\"",
-    "format:fix": "prettier --write \"packages/*/src/**/*.ts\" \"tests/**/*.ts\""
+    "start": "node --env-file-if-exists=.env dist/cli.js",
+    "format": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "format:fix": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\""
+  },
+  "dependencies": {
+    "@cyanmycelium/mcp-core": "^1.4.1",
+    "@cyanmycelium/mcp-broker-provider": "^0.4.1"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "^22.20.4",
@@ -20,5 +55,18 @@
     "tsup": "^8.5.1",
     "tsx": "^4.20.0",
     "typescript": "~5.9"
-  }
+  },
+  "homepage": "https://github.com/pandaGaume/mcp-web#readme",
+  "bugs": {
+    "url": "https://github.com/pandaGaume/mcp-web/issues"
+  },
+  "keywords": [
+    "mcp",
+    "web-search",
+    "mcp-broker",
+    "brave",
+    "tavily",
+    "cyanmycelium"
+  ],
+  "sideEffects": false
 }

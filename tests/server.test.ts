@@ -4,7 +4,7 @@ import { spawn } from "node:child_process";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import type { IMessageTransport } from "@cyanmycelium/mcp-core";
-import { webSearchSlot } from "../packages/mcp-web/src/provider.js";
+import { webSearchSlot } from "../src/provider.js";
 
 class TestTransport implements IMessageTransport {
     onMessage: ((data: string) => void) | null = null;
@@ -75,7 +75,7 @@ describe("autonomous MCP server", () => {
     });
 
     it("starts the packaged stdio CLI outside the repository and reports missing credentials", { timeout: 10000 }, async () => {
-        const cli = fileURLToPath(new URL("../packages/mcp-web/dist/cli.js", import.meta.url));
+        const cli = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
         const env: NodeJS.ProcessEnv = { ...process.env, BRAVE_SEARCH_API_KEY: "" };
         delete env.WEB_SEARCH_PROFILE;
         delete env.MCP_WEB_BROKER_URL;

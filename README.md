@@ -1,3 +1,4 @@
+[![npm](https://img.shields.io/npm/v/@cyanmycelium/mcp-web)](https://www.npmjs.com/package/@cyanmycelium/mcp-web)
 [![mcp-broker: slot](docs/assets/mcp-broker-badge.svg)](https://github.com/pandaGaume/mcp-broker)
 [![CI](https://github.com/pandaGaume/mcp-web/actions/workflows/ci.yml/badge.svg)](https://github.com/pandaGaume/mcp-web/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
@@ -11,7 +12,7 @@
 
 Provider-neutral web search for MCP clients and [mcp-broker](https://github.com/pandaGaume/mcp-broker). Five adapters share one result contract: ranked results, sources, citations, queries, usage and latency.
 
-Extracted from the web slot of co2-scrubber-governed-agent, with the npm workspace structure of mcp-history. All runtime modules, profiles and grammars live here. No sibling checkout, hardware substrate or original harness is required.
+Extracted from the web slot of co2-scrubber-governed-agent, using mcp-uns as the single-package structural reference. All runtime modules, profiles and grammars live here. No sibling checkout, hardware substrate or original harness is required.
 
 ## Run locally
 
@@ -31,7 +32,7 @@ npm start
 # Or publish the web slot on an existing broker:
 npm start -- --broker ws://localhost:3000
 # Select another profile:
-npm start -- --profile packages/mcp-web/profiles/web-search-tavily.json
+npm start -- --profile profiles/web-search-tavily.json
 ```
 
 The default transport is line-delimited MCP over stdio. Diagnostics go to stderr. The broker option connects to its multiplex endpoint `/providers`; broker access policy belongs to the broker. Set `BROKER_PROVIDER_SECRET_WEB` when provider authentication is required. `MCP_WEB_BROKER_URL` also selects broker mode.
@@ -43,7 +44,7 @@ For an MCP client, point directly at the built CLI:
   "mcpServers": {
     "web": {
       "command": "node",
-      "args": ["/absolute/path/to/mcp-web/packages/mcp-web/dist/cli.js"],
+      "args": ["/absolute/path/to/mcp-web/dist/cli.js"],
       "env": { "BRAVE_SEARCH_API_KEY": "your-key" }
     }
   }
@@ -54,7 +55,7 @@ The built-in default profile and grammars resolve relative to the package, even 
 
 ## Providers
 
-Profiles are under `packages/mcp-web/profiles/`. Secrets are referenced by environment variable name, never stored in a profile.
+Profiles are under `profiles/`. Secrets are referenced by environment variable name, never stored in a profile.
 
 | Provider | Profile | Required variables | Mode |
 | --- | --- | --- | --- |
@@ -83,7 +84,7 @@ English and French grammars are bundled. The session locale comes from the clien
 
 ## Library
 
-The workspace package is `@cyanmycelium/mcp-web`. After publishing or installing a locally packed archive:
+The root package is `@cyanmycelium/mcp-web`. After publishing or installing a locally packed archive:
 
 ```ts
 import { searchWeb } from "@cyanmycelium/mcp-web/api";
@@ -115,12 +116,13 @@ Pass a `transport` option to use another mcp-core transport, and `fetch` to inje
 `npm run format` checks TypeScript formatting. CI installs from the lockfile, checks formatting, builds, typechecks and runs fixture and MCP integration tests. Build before running the tests, which include the packaged CLI.
 
 ```sh
-npm pack -w @cyanmycelium/mcp-web
+npm pack
 ```
 
 The archive includes ESM, declarations, source maps, profiles, both grammars and the Apache-2.0 license. See [extraction notes](docs/extraction.md) for provenance and compatibility.
 
+Like mcp-uns, the repository is a single public npm package with sources in `src/`, tests in `tests/` and build output in `dist/`. The release workflow runs on `v*` tags and publishes with npm provenance. Configure this repository and `release.yml` as a trusted publisher in npm before triggering a release.
+
 ## License
 
 Apache-2.0.
-

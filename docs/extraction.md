@@ -9,7 +9,7 @@ The starting implementation was copied from the local co2-scrubber-governed-agen
 - `slots/lib/slot-server.ts` and `slots/lib/grammars.ts`: MCP publication and grammar resolution.
 - `tests/web.test.ts`: provider fixtures and request validation.
 
-mcp-history provided the workspace/package layout, TypeScript defaults, formatter configuration, CI shape and Apache-2.0 license.
+mcp-history provided the initial reference and panda family artwork. The final structure follows mcp-uns: one public npm package at the repository root, with sources, tests, build configuration and a tag-driven release workflow.
 
 ## Changes
 

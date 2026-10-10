@@ -4,7 +4,7 @@
  */
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { normalizeWebSearchRequest, searchWeb, type FetchLike } from "../packages/mcp-web/src/api.js";
+import { normalizeWebSearchRequest, searchWeb, type FetchLike } from "../src/api.js";
 
 describe("the governed web search adapters", () => {
     it("uses Brave Search directly and returns ranked snippets without a second model", async () => {
