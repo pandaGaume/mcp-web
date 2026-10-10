@@ -1,0 +1,23 @@
+{
+  "name": "@cyanmycelium/mcp-web",
+  "version": "0.1.0",
+  "description": "Provider-neutral web search with five adapters, an MCP server and an mcp-broker slot.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "Guillaume Pelletier (CyanMycelium)",
+  "repository": { "type": "git", "url": "git+https://github.com/pandaGaume/mcp-web.git", "directory": "packages/mcp-web" },
+  "engines": { "node": ">=22.0.0" },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": { "mcp-web": "./dist/cli.js" },
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./api": { "types": "./dist/api.d.ts", "import": "./dist/api.js" }
+  },
+  "files": ["dist", "grammars", "profiles", "LICENSE"],
+  "scripts": { "build": "tsup", "prepublishOnly": "npm run build" },
+  "dependencies": {
+    "@cyanmycelium/mcp-core": "^1.4.1",
+    "@cyanmycelium/mcp-broker-provider": "^0.4.1"
+  }
+}
